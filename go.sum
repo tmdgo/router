@@ -1,0 +1,6 @@
+github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
+github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
+github.com/tmdgo/dependencies v1.0.0 h1:RbLzZ/JhZeAimr+Bmg8riHpwtpGd3XEKWNDniiW7rMk=
+github.com/tmdgo/dependencies v1.0.0/go.mod h1:0zX+C5fMjjPc+CYGyjGEs+4aalG5WLPSPv/fd8qsRnI=
+github.com/tmdgo/reflection v1.0.0 h1:TELiQzV5DD0Q7Co/qROlOvlR9XO2jck7s5qrVhT8Rws=
+github.com/tmdgo/reflection v1.0.0/go.mod h1:a7IcljZ7W8vhCj5VmD1KhXtAw/BaOzL7PVPhVQdZf4Y=
