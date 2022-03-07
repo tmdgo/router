@@ -31,7 +31,7 @@ func (router *Router) AddController(controller Controller) {
 	router.routes = append(router.routes, controller.GetRoutes()...)
 }
 
-func (router *Router) ListenAndServe() {
+func (router *Router) ListenAndServe(address string) {
 	var wait time.Duration
 	flag.DurationVar(&wait, "graceful-timeout", time.Second*15, "the duration for which the server gracefully wait for existing connections to finish - e.g. 15s or 1m")
 	flag.Parse()
@@ -43,10 +43,9 @@ func (router *Router) ListenAndServe() {
 	}
 
 	srv := &http.Server{
-		Addr:         "0.0.0.0:80",
+		Addr:         address,
 		WriteTimeout: time.Second * 15,
 		ReadTimeout:  time.Second * 15,
-		IdleTimeout:  time.Second * 60,
 		Handler:      r,
 	}
 
