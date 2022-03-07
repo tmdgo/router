@@ -23,7 +23,7 @@ func routerHandler(router *Router, route Route, handleFunc interface{}) func(w h
 		if route.UseRequestModel {
 			requestModel := functions.CallFunc(route.RequestModel, nil)[0].Interface()
 			_ = json.NewDecoder(r.Body).Decode(requestModel)
-			manager.Add(requestModel)
+			manager.AddModel(requestModel)
 		}
 
 		handlerResult := manager.CallFunc(handleFunc)
