@@ -32,6 +32,10 @@ func routerHandler(router *Router, route Route, handleFunc interface{}) func(w h
 		routerErr := handlerResult[1].Interface().(Error)
 
 		if routerErr.Err != nil {
+			if routerErr.Message == "" {
+				routerErr.Message = routerErr.Err.Error()
+			}
+
 			jsonModel, err := json.Marshal(jsonError{
 				Status:  "Error",
 				Message: routerErr.Message,
@@ -40,6 +44,10 @@ func routerHandler(router *Router, route Route, handleFunc interface{}) func(w h
 			if err != nil {
 				w.WriteHeader(http.StatusInternalServerError)
 				return
+			}
+
+			if routerErr.StatusCode == 0 {
+				routerErr.StatusCode = http.StatusInternalServerError
 			}
 
 			w.WriteHeader(routerErr.StatusCode)
