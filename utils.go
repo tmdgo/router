@@ -6,6 +6,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/tmdgo/dependencies"
+	"github.com/tmdgo/reflection/functions"
 )
 
 func routerHandler(router *Router, route Route, handleFunc interface{}) func(w http.ResponseWriter, r *http.Request) {
@@ -18,6 +19,11 @@ func routerHandler(router *Router, route Route, handleFunc interface{}) func(w h
 		}
 		if route.UseOptionalVars {
 			manager.Add(OptionalVars{Value: r.URL.Query()})
+		}
+		if route.UseRequestModel {
+			requestModel := functions.CallFunc(route.RequestModel, nil)[0].Interface()
+			_ = json.NewDecoder(r.Body).Decode(requestModel)
+			manager.Add(requestModel)
 		}
 
 		handlerResult := manager.CallFunc(handleFunc)
