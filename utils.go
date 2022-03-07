@@ -48,13 +48,17 @@ func routerHandler(router *Router, route Route, handleFunc interface{}) func(w h
 			return
 		}
 
-		jsonModel, err := json.Marshal(result.Model)
+		if result.Model != nil {
+			jsonModel, err := json.Marshal(result.Model)
 
-		if err != nil {
+			if err != nil {
+				return
+			}
+			w.WriteHeader(result.StatusCode)
+			w.Write(jsonModel)
 			return
 		}
 
 		w.WriteHeader(result.StatusCode)
-		w.Write(jsonModel)
 	}
 }
