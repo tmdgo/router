@@ -15,10 +15,10 @@ func routerHandler(router *Router, route Route, handleFunc interface{}) func(w h
 		manager.InitWithOtherManager(router.manager)
 
 		if route.UseVars {
-			manager.Add(Vars{Value: mux.Vars(r)})
+			manager.AddModel(&Vars{Value: mux.Vars(r)})
 		}
 		if route.UseOptionalVars {
-			manager.Add(OptionalVars{Value: r.URL.Query()})
+			manager.AddModel(&OptionalVars{Value: r.URL.Query()})
 		}
 		if route.UseRequestModel {
 			requestModel := functions.CallFunc(route.RequestModel, nil)[0].Interface()
